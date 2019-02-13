@@ -15,7 +15,7 @@ pipeline {
   stages {
     stage('Pull') {
       steps {
-        def target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
+        target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
         sh "ssh root@${target_host} 'su - ${update_project} ; sh ~/kael/update/pull.sh' "
         echo 'Pull success.'
       }
@@ -23,7 +23,7 @@ pipeline {
 
     stage('Depoly') {
       steps {
-        def target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
+        target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
         sh "ssh root@${target_host} 'su - ${update_project} ; sh ~/kael/update/deploy.sh' "
         echo "Depoly success."
       }
@@ -31,7 +31,7 @@ pipeline {
     
     stage('Restart') {
       steps {
-        def target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
+        target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
         sh "ssh root@${target_host} 'su - ${update_project} ; sh ~/kael/update/restart.sh' "
         echo "Restart success."
       }
@@ -39,7 +39,7 @@ pipeline {
     
     stage('Logging') {
       steps {
-        def target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
+        target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
         sh "ssh root@${target_host} 'su - ${update_project} ; tail -100f ~/apps/logs/${update_project}.log' "
         echo "Logging success."
       }
