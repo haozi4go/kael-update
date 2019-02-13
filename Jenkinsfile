@@ -10,13 +10,13 @@ pipeline {
   parameters{
     choice(name: 'update_project', choices: 'pbase\nbill\n', description: '请选择升级的应用')
     string(name: 'update_version', defaultValue: '', description: '升级指定版本,默认为最新版本')
-    choice(name: 'update_host', choices: '140.143.246.85:prod\n140.143.246.85:test\n', description: '请选择升级的目标主机')
+    choice(name: 'update_host', choices: '140.143.246.85\n140.143.246.85\n', description: '请选择升级的目标主机')
   }
   stages {
     stage('Pull') {
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
-        sh "ssh root@(cut -d ':' -f1 ${update_host}) 'su - ${update_project} ; sh ~/kael/update/pull.sh' "
+        sh "ssh root@${update_host} 'su - ${update_project} ; sh ~/kael/update/pull.sh' "
         echo 'Pull success.'
       }
     }
@@ -24,7 +24,7 @@ pipeline {
     stage('Depoly') {
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
-        sh "ssh root@(cut -d ':' -f1 ${update_host}) 'su - ${update_project} ; sh ~/kael/update/deploy.sh' "
+        sh "ssh root@${update_host} 'su - ${update_project} ; sh ~/kael/update/deploy.sh' "
         echo "Depoly success."
       }
     }
@@ -32,7 +32,7 @@ pipeline {
     stage('Restart') {
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
-        sh "ssh root@(cut -d ':' -f1 ${update_host}) 'su - ${update_project} ; sh ~/kael/update/restart.sh' "
+        sh "ssh root@${update_host} 'su - ${update_project} ; sh ~/kael/update/restart.sh' "
         echo "Restart success."
       }
     }
@@ -40,7 +40,7 @@ pipeline {
     stage('Logging') {
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
-        sh "ssh root@(cut -d ':' -f1 ${update_host}) 'su - ${update_project} ; tail -100f ~/apps/logs/${update_project}.log' "
+        sh "ssh root@${update_host} 'su - ${update_project} ; tail -100f ~/apps/logs/${update_project}.log' "
         echo "Logging success."
       }
     }
