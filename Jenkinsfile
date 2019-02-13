@@ -31,7 +31,7 @@ pipeline {
     
     stage('Restart') {
       options {
-        timeout(time: 2, unit: 'MINUTE') 
+        timeout(time: 2, unit: 'MINUTES') 
       }
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
@@ -42,7 +42,7 @@ pipeline {
     
     stage('Logging') {
       options {
-        timeout(time: 2, unit: 'MINUTE') 
+        timeout(time: 2, unit: 'MINUTES') 
       }
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
