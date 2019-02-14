@@ -2,7 +2,6 @@ pipeline {
   agent any
   environment { 
     update_project_type = 'jar' //war zip jar
-    update_resart_time = '5' //
   }
   //options {
     //disableConcurrentBuilds() //不允许并行执行Pipeline
@@ -16,14 +15,14 @@ pipeline {
   stages {
     stage('Pull') {
       steps {
-        //sh "ssh root@${update_host} 'sh ~/kael/update/pull.sh ${update_project} ${update_version}' "
+        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'sh ~/kael/update/pull.sh ${update_project} ${update_version}' "
         echo 'Pull success.'
       }
     }
 
     stage('Depoly') {
       steps {
-        //sh "ssh root@${update_host} 'sh ~/kael/update/deploy.sh ${update_project} ${update_version}' "
+        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'sh ~/kael/update/deploy.sh ${update_project} ${update_version}' "
         echo "Depoly success."
       }
     }
