@@ -40,7 +40,7 @@ pipeline {
           //ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project}'
           //ssh root@${update_host} 'exit 1'          
         //}
-        sh "ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project} & { sleep 5 ; kill $! & } ' "
+        sh "ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project} & { sleep 5 ; kill \$! & } ' "
         echo "Restart success."
       }
     }
