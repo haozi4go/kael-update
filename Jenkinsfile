@@ -40,7 +40,7 @@ pipeline {
           //ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project}'
           //ssh root@${update_host} 'exit 1'          
         //}
-        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'sh ~/kael/update/restart.sh ${update_project} > /dev/null < /dev/null 2>&1' "  //输入输出均指向空，防止脚本不退出（此时不能查看升级时的脚本日志）
+        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'sh ~/kael/update/restart.sh ${update_project} | sed \"/started/Q\" ' "  //输入输出均指向空，防止脚本不退出（此时不能查看升级时的脚本日志）
         echo "Restart success."
       }
     }
