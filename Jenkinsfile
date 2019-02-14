@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment { 
     update_project_type = 'jar' //war zip jar
-    update_resart_time = '30' //
+    update_resart_time = '5' //
   }
   //options {
     //disableConcurrentBuilds() //不允许并行执行Pipeline
