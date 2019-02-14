@@ -51,7 +51,7 @@ pipeline {
       }
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
-        sh "ssh root@${update_host} 'tail -100f /home/${update_project}/apps/logs/${update_project}.log | sed \'/Updating port to/Q\' ' "
+        sh "ssh root@${update_host} 'tail -100f /home/${update_project}/apps/logs/${update_project}.log | sed \"/Updating port to/Q\" ' "
         echo "Logging success."
       }
     }
