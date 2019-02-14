@@ -58,7 +58,7 @@ pipeline {
     }
     stage('Check running') {
       steps {
-        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'ps -ef|grep ${update_project} ' "
+        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'ps -ef|grep ${update_project} | grep -v grep' "
         echo "Check running success."
       }
     }
