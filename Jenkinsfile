@@ -40,7 +40,7 @@ pipeline {
           //ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project}'
           //ssh root@${update_host} 'exit 1'          
         //}
-        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'sh ~/kael/update/restart.sh ${update_project} > /dev/null < /dev/null 2>&1' "
+        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'sh ~/kael/update/restart.sh ${update_project} > /dev/null < /dev/null 2>&1' "  //输入输出均指向空，防止脚本不退出（此时不能查看升级时的脚本日志）
         echo "Restart success."
       }
     }
@@ -52,7 +52,7 @@ pipeline {
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
         //echo "${target_host}"
-        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'tail -100f /home/${update_project}/apps/logs/${update_project}.log | sed \"/Updating port to/Q\" ' "
+        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'tail -100f /home/${update_project}/apps/logs/${update_project}.log | sed \"/Updating port to/Q\" ' " // 检测到指定内容则退出
         echo "Logging success."
       }
     }
