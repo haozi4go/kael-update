@@ -40,7 +40,7 @@ pipeline {
           //ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project}'
           //ssh root@${update_host} 'exit 1'          
         //}
-        sh "ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project} > /dev/null < /dev/null 2>&1' "
+        sh "ssh root@\$(cut -d \":\" -f1 ${update_host}) 'sh ~/kael/update/restart.sh ${update_project} > /dev/null < /dev/null 2>&1' "
         echo "Restart success."
       }
     }
@@ -58,7 +58,7 @@ pipeline {
     }
     stage('Check running') {
       steps {
-        sh "ssh root@${update_host} 'ps -ef|grep ${update_project} | grep -v grep | wc -l ' "
+        sh "ssh root@$\$(cut -d \":\" -f1 ${update_host}) 'ps -ef|grep ${update_project} | grep -v grep | wc -l ' "
         echo "Check running success."
       }
     }
