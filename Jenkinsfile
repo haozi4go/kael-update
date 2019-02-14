@@ -11,7 +11,7 @@ pipeline {
   parameters{
     choice(name: 'update_project', choices: 'pbase\nbill\ndemo\n', description: '请选择升级的应用')
     string(name: 'update_version', defaultValue: '', description: '升级指定版本,默认为最新版本')
-    choice(name: 'update_host', choices: '140.143.246.85\n140.143.246.85\n', description: '请选择升级的目标主机')
+    choice(name: 'update_host', choices: '140.143.246.85:test\n140.143.246.85:prod\n', description: '请选择升级的目标主机')
   }
   stages {
     stage('Pull') {
