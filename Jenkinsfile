@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment { 
     update_project_type = 'jar' //war zip jar
+    update_resart_time = '30' //
   }
   //options {
     //disableConcurrentBuilds() //不允许并行执行Pipeline
@@ -39,7 +40,7 @@ pipeline {
           //ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project}'
           //ssh root@${update_host} 'exit 1'          
         //}
-        sh "ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project};echo 'haozi'; sleep 1000; exit 1 ' "
+        sh "ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project}; echo 'waitting...'; sleep ${update_resart_time}; exit 1 ' "
         echo "Restart success."
       }
     }
