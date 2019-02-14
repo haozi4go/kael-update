@@ -33,7 +33,7 @@ pipeline {
         timeout(time: 2, unit: 'MINUTES') 
       }
       steps {
-        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'sh ~/kael/update/restart.sh ${update_project} | sed \"/nohup:/Q\" ' "  // 检测到指定内容nohup:则退出
+        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'sh ~/kael/update/restart.sh ${update_project} | sed \"/started/Q\" ' "  // 检测到指定内容started则退出
         echo "Restart success."
       }
     }
@@ -43,7 +43,7 @@ pipeline {
         timeout(time: 2, unit: 'MINUTES') 
       }
       steps {
-        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'tail -100f /home/${update_project}/apps/logs/${update_project}.log | sed \"/Updating port to/Q\" ' " // 检测到指定内容则退出
+        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'tail -100f /home/${update_project}/apps/logs/${update_project}.log | sed \"/Updating port to/Q\" ' " // 检测到指定内容Updating port to则退出
         echo "Logging success."
       }
     }
