@@ -35,11 +35,11 @@ pipeline {
       }
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
-        script {
-          ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project}'
-          ssh root@${update_host} 'exit 1'          
-        }
-        //sh "ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project} ' "
+        //script {
+          //ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project}'
+          //ssh root@${update_host} 'exit 1'          
+        //}
+        sh "ssh root@${update_host} 'sh ~/kael/update/restart.sh ${update_project}; sleep 1000; exit 1 ' "
         echo "Restart success."
       }
     }
