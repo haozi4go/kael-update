@@ -55,6 +55,12 @@ pipeline {
         echo "Logging success."
       }
     }
+    stage('Check Running') {
+      steps {
+        sh "ssh root@${update_host} 'ps -ef|grep ${update_project} | grep -v grep | wc -l ' "
+        echo "Check Running success."
+      }
+    }
 
   }
 }
