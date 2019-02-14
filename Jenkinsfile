@@ -16,7 +16,7 @@ pipeline {
     stage('Pull') {
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
-        sh "ssh root@${update_host} 'sh ~/kael/update/pull.sh ${update_project} ${update_version}' "
+        //sh "ssh root@${update_host} 'sh ~/kael/update/pull.sh ${update_project} ${update_version}' "
         echo 'Pull success.'
       }
     }
@@ -24,7 +24,7 @@ pipeline {
     stage('Depoly') {
       steps {
         //target_host = sh(returnStatus: true, script: "cut -d ':' -f1 ${update_host}")
-        sh "ssh root@${update_host} 'sh ~/kael/update/deploy.sh ${update_project} ${update_version}' "
+        //sh "ssh root@${update_host} 'sh ~/kael/update/deploy.sh ${update_project} ${update_version}' "
         echo "Depoly success."
       }
     }
