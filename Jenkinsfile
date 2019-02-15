@@ -22,7 +22,7 @@ pipeline {
 
     stage('Depoly') {
       steps {
-        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'sh ~/kael/update/deploy.sh ${update_project} ${update_version}' "
+        sh "ssh root@\$(echo ${update_host} | cut -d \":\" -f1) 'sh ~/kael/update/deploy.sh ${update_project} ' "
         echo "Depoly success."
       }
     }
